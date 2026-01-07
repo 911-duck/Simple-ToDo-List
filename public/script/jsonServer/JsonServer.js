@@ -92,7 +92,7 @@ class JsonServer {
             },
             body: JSON.stringify(obj)
         })
-        return response
+        return response 
     }
     async getLastID() {
         const result = await this.getItems()

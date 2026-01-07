@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+     font-family: "Atkinson Hyperlegible Mono", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+button,input{
+    outline: none;
+    border: none;
+    border-radius: 5px;
+}
+
+button,.item__checkbox{
+    width: 30px;
+    height: 30px;
+}
+
+html,
+body{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+}
+
+.container{
+    width: 800px;
+    height: 600px;
+    border: white solid 1px;
+    gap: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    color: white;
+}
+
+.functions{
+    width: 100%;
+    height: auto;
+    background-color: rgb(26, 26, 26);
+    border: white solid 1px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 10px 20px;
+    gap: 20px;
+}
+
+.functions>input{
+    background-color: black;
+    border: 1px solid white;
+    flex-grow: 1;
+    height: 100%;
+    padding: 5px;
+    color: white;
+}
+
+.add{
+    color: rgb(111, 163, 32);
+    background-color: rgb(15, 25, 0);
+    border: 1px solid rgb(112, 161, 39);
+    transition: all 0.25s;
+}
+
+.add:active{
+    background-color: rgb(102, 157, 19);
+    transform: scale(0.9);
+}
+
+.delete{
+    color: rgb(163, 32, 32);
+    background-color: rgb(25, 0, 0);
+    border: 1px solid rgb(161, 39, 39);
+    transition: all 0.25s;
+}
+
+.delete:active{
+    background-color: rgb(157, 19, 19);
+    transform: scale(0.9);
+}
+
+.list{
+    flex-grow: 1;
+    width: 100%;
+    overflow-y: scroll;
+    padding: 0 20px 0 0;
+}
+
+.list::-webkit-scrollbar {
+    width: 20px; 
+    height: 10px;
+    border-radius: 5px;
+}
+
+.list::-webkit-scrollbar-thumb { 
+    background: rgb(153, 153, 153);
+    border-radius: 5px;
+}
+.list::-webkit-scrollbar-track {
+    background: rgb(26, 26, 26);
+    border: 1px solid rgb(153, 153, 153);
+    border-radius: 5px;
+} 
+
+.item{
+    width: 100%;
+    height: 150px;
+    border-radius: 20px;
+    border: 1px solid white;
+    background-color: rgb(26, 26, 26);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 20px;
+}
+
+.txt{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.txt__header{
+    width: 100%;
+    height: 40%;
+    border-bottom: 4px dashed white;
+    font-size: 30px;
+}
+
+.txt__discription{
+     width: 100%;
+    height: 60%;
+}

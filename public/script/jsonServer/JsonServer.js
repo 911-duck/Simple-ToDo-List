@@ -19,7 +19,7 @@ class JsonServer {
         return response
     }
 
-    async patchItem(checkbox, id, header, discription) {
+    async patchItem(checkbox, id, header, discription, priority) {
         fetch(`http://localhost:3000/items/${id}` , {
             method: 'PATCH',
             headers: {
@@ -29,15 +29,12 @@ class JsonServer {
                 "header": header,
                 "discription": discription,
                 "done": checkbox,
+                "priority": priority,
             })
         })
     }
-    async display(container) {
-        container.innerHTML = ""
-
-        const result = await this.getItems()
-
-        result.forEach(item => {
+    async displayDOM(container,obj){
+        obj.forEach(item => {
 
             const element = document.createElement("div")
 
@@ -48,8 +45,14 @@ class JsonServer {
                 <input type="checkbox" class="item__checkbox" ${item.done}>
                 <div class="item__txt txt">
                     <input disabled class="txt__header">
-                    <span>${item.date}</span>
+                    <span>${item.date} <select class="functions__select" title="приоритет" disabled>
+                        <option value="высокий" ${item.priority == "высокий"?"selected": ""}>высокий</option>
+                        <option value="средний" ${item.priority == "средний"?"selected": ""}>средний</option>
+                        <option value="низкий" ${item.priority == "низкий"?"selected": ""}>низкий</option>
+                        <option value="" ${item.priority == ""?"selected": ""}>ни какой</option>
+                    </select></span>
                     <input disabled class="txt__discription">
+                    
                 </div>
                 <button class="item__mod mod"><i class="fa-solid fa-recycle"></i></button>
                 <button class="item__delete delete"><i class="fa-regular fa-trash-can"></i></button>
@@ -71,18 +74,28 @@ class JsonServer {
                 else element.querySelector(".txt__header").disabled = true
                 if(element.querySelector(".txt__discription").disabled == true)element.querySelector(".txt__discription").disabled = false
                 else element.querySelector(".txt__discription").disabled = true
+                 if(element.querySelector(".functions__select").disabled == true)element.querySelector(".functions__select").disabled = false
+                else element.querySelector(".functions__select").disabled = true
             })
 
             element.querySelector(".txt__discription").addEventListener("input",async e=>{
-                this.patchItem(element.querySelector(".item__checkbox").checked, item.id,item.header , element.querySelector(".txt__discription").value)
+                this.patchItem(element.querySelector(".item__checkbox").checked, item.id,item.header , element.querySelector(".txt__discription").value,item.priority)
             })
 
             element.querySelector(".txt__header").addEventListener("input",async e=>{
-                this.patchItem(element.querySelector(".item__checkbox").checked, item.id, element.querySelector(".txt__header").value, item.discription)
+                this.patchItem(element.querySelector(".item__checkbox").checked, item.id, element.querySelector(".txt__header").value, item.discription,item.priority)
+            })
+            element.querySelector(".functions__select").addEventListener("input",async e=>{
+                this.patchItem(element.querySelector(".item__checkbox").checked, item.id, item.header, item.discription,element.querySelector(".functions__select").value)
             })
 
             container.appendChild(element)
         });
+    }
+    async display(container) {
+        container.innerHTML = ""
+        const result = await this.getItems()
+        return result
     }
     async postItem(obj) {
         const response = await fetch(`${this.API}/${this.type}`, {
@@ -100,7 +113,7 @@ class JsonServer {
         if (result.length) return result[result.length - 1].id
         else return 0
     }
-    async add(header, discription) {
+    async add(header, discription, priority) {
         const now = new Date()
 
         const obj = {
@@ -108,6 +121,7 @@ class JsonServer {
             header: header,
             discription: discription,
             done: "",
+            priority: priority,
             date: now.toLocaleString("ru-RU")
         }
 

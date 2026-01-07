@@ -13,7 +13,13 @@
 button,input{
     outline: none;
     border: none;
+    background:none;
+    color: white;
     border-radius: 5px;
+}
+
+input:disabled{
+    color: white;
 }
 
 button,.item__checkbox{
@@ -39,7 +45,7 @@ body{
     padding: 20px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-direction: column;
     color: white;
 }
@@ -91,10 +97,28 @@ body{
     transform: scale(0.9);
 }
 
+.mod{
+    color: rgb(32, 36, 163);
+    background-color: rgb(0, 2, 25);
+    border: 1px solid rgb(32, 36, 163);
+    transition: all 0.25s;
+}
+
+.mod:active{
+    background-color: rgb(27, 31, 145);
+    transform: scale(0.9);
+}
+
 .list{
     flex-grow: 1;
     width: 100%;
+    height: auto;
     overflow-y: scroll;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 20px;
     padding: 0 20px 0 0;
 }
 
@@ -117,6 +141,7 @@ body{
 .item{
     width: 100%;
     height: 150px;
+    min-height: 150px;
     border-radius: 20px;
     border: 1px solid white;
     background-color: rgb(26, 26, 26);

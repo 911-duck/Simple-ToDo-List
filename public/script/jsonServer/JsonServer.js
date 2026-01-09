@@ -20,7 +20,7 @@ class JsonServer {
     }
 
     async patchItem(checkbox, id, header, discription, priority) {
-        fetch(`http://localhost:3000/items/${id}` , {
+        fetch(`${this.API}/${this.type}/${id}` , {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ class JsonServer {
             element.classList.add("list__item")
 
             element.innerHTML = `
-                <input type="checkbox" class="item__checkbox" ${item.done}>
+                <input type="checkbox" class="item__checkbox" ${item.done ? "checked" : ""}>
                 <div class="item__txt txt">
                     <input disabled class="txt__header">
                     <span>${item.date} <select class="functions__select" title="приоритет" disabled>
@@ -120,7 +120,7 @@ class JsonServer {
             id: `${Number(await this.getLastID()) + 1}`,
             header: header,
             discription: discription,
-            done: "",
+            done: false,
             priority: priority,
             date: now.toLocaleString("ru-RU")
         }

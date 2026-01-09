@@ -17,7 +17,7 @@ const PRIORITY_INPUT = document.querySelector(".functions__select")
 const SELECT_FILTER = document.querySelector(".filters__filter")
 const SELECT_SORT = document.querySelector(".filters__sort")
 
-// objects
+// objects 
 const jsonServer = new JsonServer(API,type)
 
 let obj = await jsonServer.display(CONTAINER)
